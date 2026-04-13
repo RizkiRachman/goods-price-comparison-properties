@@ -1,2 +1,2 @@
 # Never commit actual secrets
-*.local
+**/application-local.properties

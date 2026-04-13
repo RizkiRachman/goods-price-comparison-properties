@@ -4,34 +4,31 @@ Environment property files for [goods-price-comparison-service](https://github.c
 
 ## Usage
 
-Source the env file before running the application:
+Run the application with the appropriate Spring profile:
 
 ```bash
 # Development
-source .env.dev
-
-# Then run
-mvn spring-boot:run
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
 
 # Or with Docker
-docker run --env-file .env.dev ...
+docker run -v ./dev/application.properties:/app/config/application.properties ...
 ```
 
 ## Files
 
-| File | Environment |
-|------|-------------|
-| `.env.dev` | Local development |
-| `.env.staging` | Staging |
-| `.env.prod` | Production |
+| Directory | Environment |
+|-----------|-------------|
+| `dev/` | Local development |
+| `staging/` | Staging |
+| `prod/` | Production |
 
 ## Security
 
 - **Never commit real credentials** — use `.local` overrides (gitignored)
-- Copy an env file to `.env.dev.local` and fill in real values
+- Copy a properties file to `dev/application-local.properties` and fill in real values
 - In CI/CD, inject secrets via vault or pipeline variables
 
 ```bash
-cp .env.dev .env.dev.local
-# Edit .env.dev.local with real credentials
+cp dev/application.properties dev/application-local.properties
+# Edit dev/application-local.properties with real credentials
 ```
